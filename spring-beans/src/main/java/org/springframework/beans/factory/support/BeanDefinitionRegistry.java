@@ -22,42 +22,14 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.core.AliasRegistry;
 
 /**
- * Interface for registries that hold bean definitions, for example RootBeanDefinition
- * and ChildBeanDefinition instances. Typically implemented by BeanFactories that
- * internally work with the AbstractBeanDefinition hierarchy.
- *
- * <p>This is the only interface in Spring's bean factory packages that encapsulates
- * <i>registration</i> of bean definitions. The standard BeanFactory interfaces
- * only cover access to a <i>fully configured factory instance</i>.
- *
- * <p>Spring's bean definition readers expect to work on an implementation of this
- * interface. Known implementors within the Spring core are DefaultListableBeanFactory
- * and GenericApplicationContext.
- *
- * @author Juergen Hoeller
- * @since 26.11.2003
- * @see org.springframework.beans.factory.config.BeanDefinition
- * @see AbstractBeanDefinition
- * @see RootBeanDefinition
- * @see ChildBeanDefinition
- * @see DefaultListableBeanFactory
- * @see org.springframework.context.support.GenericApplicationContext
- * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader
- * @see PropertiesBeanDefinitionReader
+ * 用于保存bean定义的注册中心的接口，例如RootBeanDefinition和ChildBeanDefinition实例。通常由内部使用AbstractBeanDefinition层次结构的beanfactory实现。
+ * <p>这是Spring bean工厂包中封装<i>注册<i>的bean定义的唯一接口。标准BeanFactory接口只涵盖对<i>完全配置工厂实例<i>的访问。Spring的bean定义读者希望处理这个接口的实现。
+ * Spring核心中已知的实现者是DefaultListableBeanFactory和GenericApplicationContext。
  */
 public interface BeanDefinitionRegistry extends AliasRegistry {
 
 	/**
-	 * Register a new bean definition with this registry.
-	 * Must support RootBeanDefinition and ChildBeanDefinition.
-	 * @param beanName the name of the bean instance to register
-	 * @param beanDefinition definition of the bean instance to register
-	 * @throws BeanDefinitionStoreException if the BeanDefinition is invalid
-	 * @throws BeanDefinitionOverrideException if there is already a BeanDefinition
-	 * for the specified bean name and we are not allowed to override it
-	 * @see GenericBeanDefinition
-	 * @see RootBeanDefinition
-	 * @see ChildBeanDefinition
+	 * 在此注册中心注册一个新的bean定义。必须支持RootBeanDefinition和ChildBeanDefinition。
 	 */
 	void registerBeanDefinition(String beanName, BeanDefinition beanDefinition)
 			throws BeanDefinitionStoreException;

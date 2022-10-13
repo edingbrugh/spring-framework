@@ -162,7 +162,7 @@ public abstract class AbstractRefreshableWebApplicationContext extends AbstractR
 	}
 
 	/**
-	 * Register request/session scopes, a {@link ServletContextAwareProcessor}, etc.
+	 * 注册requestsession范围, a {@link ServletContextAwareProcessor}, etc.
 	 */
 	@Override
 	protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
@@ -194,7 +194,7 @@ public abstract class AbstractRefreshableWebApplicationContext extends AbstractR
 	}
 
 	/**
-	 * Initialize the theme capability.
+	 * 初始化主题功能。
 	 */
 	@Override
 	protected void onRefresh() {

@@ -222,9 +222,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	}
 
 	/**
-	 * This implementation delegates to this context's ResourceLoader if it
-	 * implements the ResourcePatternResolver interface, falling back to the
-	 * default superclass behavior else.
+	 * 如果实现了ResourcePatternResolver接口，则该实现将委托给该上下文的ResourceLoader，退回到默认的超类行为else。
 	 * @see #setResourceLoader
 	 */
 	@Override

@@ -726,7 +726,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 
 	//---------------------------------------------------------------------
-	// Implementation of ConfigurableListableBeanFactory interface
+	// ConfigurableListableBeanFactory接口的实现
 	//---------------------------------------------------------------------
 
 	@Override

@@ -35,16 +35,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
- * Abstract base class for bean definition readers which implement
- * the {@link BeanDefinitionReader} interface.
- *
- * <p>Provides common properties like the bean factory to work on
- * and the class loader to use for loading bean classes.
- *
- * @author Juergen Hoeller
- * @author Chris Beams
- * @since 11.12.2003
- * @see BeanDefinitionReaderUtils
+ * 设置是否允许bean之间的循环引用—并自动尝试解析它们。< p >默认是“真正的”。
+ * 关闭此选项可在遇到循环引用时抛出异常，完全禁止循环引用。
  */
 public abstract class AbstractBeanDefinitionReader implements BeanDefinitionReader, EnvironmentCapable {
 
@@ -65,17 +57,11 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 
 
 	/**
-	 * Create a new AbstractBeanDefinitionReader for the given bean factory.
-	 * <p>If the passed-in bean factory does not only implement the BeanDefinitionRegistry
-	 * interface but also the ResourceLoader interface, it will be used as default
-	 * ResourceLoader as well. This will usually be the case for
-	 * {@link org.springframework.context.ApplicationContext} implementations.
-	 * <p>If given a plain BeanDefinitionRegistry, the default ResourceLoader will be a
-	 * {@link org.springframework.core.io.support.PathMatchingResourcePatternResolver}.
-	 * <p>If the passed-in bean factory also implements {@link EnvironmentCapable} its
-	 * environment will be used by this reader.  Otherwise, the reader will initialize and
-	 * use a {@link StandardEnvironment}. All ApplicationContext implementations are
-	 * EnvironmentCapable, while normal BeanFactory implementations are not.
+	 * 为给定的bean工厂创建一个新的AbstractBeanDefinitionReader。如果传入的bean工厂不仅实现了BeanDefinitionRegistry接口，还实现了ResourceLoader接口，
+	 * 那么它也将被用作默认的ResourceLoader。这通常是{@link org.springframework.context的情况。ApplicationContext}的实现。
+	 * 如果给出一个普通的BeanDefinitionRegistry，默认的ResourceLoader将是{@link org.springframe.core.io.support.pathmatchingresourcepatternresolver}
+	 * 。<p>如果传入的bean工厂也实现了{@link EnvironmentCapable}，那么它的环境将被这个阅读器使用。否则，
+	 * 阅读器将初始化并使用{@link StandardEnvironment}。所有的ApplicationContext实现都是环境能力的，而普通的BeanFactory实现不是。
 	 * @param registry the BeanFactory to load bean definitions into,
 	 * in the form of a BeanDefinitionRegistry
 	 * @see #setResourceLoader
@@ -113,15 +99,9 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 	}
 
 	/**
-	 * Set the ResourceLoader to use for resource locations.
-	 * If specifying a ResourcePatternResolver, the bean definition reader
-	 * will be capable of resolving resource patterns to Resource arrays.
-	 * <p>Default is PathMatchingResourcePatternResolver, also capable of
-	 * resource pattern resolving through the ResourcePatternResolver interface.
-	 * <p>Setting this to {@code null} suggests that absolute resource loading
-	 * is not available for this bean definition reader.
-	 * @see org.springframework.core.io.support.ResourcePatternResolver
-	 * @see org.springframework.core.io.support.PathMatchingResourcePatternResolver
+	 * 将ResourceLoader设置为用于资源位置。如果指定ResourcePatternResolver，则bean定义阅读器将能够将资源模式解析为资源数组。
+	 * <p>默认是PathMatchingResourcePatternResolver，也能够通过ResourcePatternResolver接口进行资源模式解析。
+	 * <p>将其设置为{@code null}表示此bean定义阅读器不可用绝对资源加载。
 	 */
 	public void setResourceLoader(@Nullable ResourceLoader resourceLoader) {
 		this.resourceLoader = resourceLoader;
@@ -134,11 +114,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 	}
 
 	/**
-	 * Set the ClassLoader to use for bean classes.
-	 * <p>Default is {@code null}, which suggests to not load bean classes
-	 * eagerly but rather to just register bean definitions with class names,
-	 * with the corresponding Classes to be resolved later (or never).
-	 * @see Thread#getContextClassLoader()
+	 * 将ClassLoader设置为用于bean类。<p>默认值是{@code null}，这建议不要急于加载bean类，而只是用类名注册bean定义，对应的类稍后解析(或者永远不解析)。
 	 */
 	public void setBeanClassLoader(@Nullable ClassLoader beanClassLoader) {
 		this.beanClassLoader = beanClassLoader;
@@ -196,19 +172,10 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 	}
 
 	/**
-	 * Load bean definitions from the specified resource location.
-	 * <p>The location can also be a location pattern, provided that the
-	 * ResourceLoader of this bean definition reader is a ResourcePatternResolver.
-	 * @param location the resource location, to be loaded with the ResourceLoader
-	 * (or ResourcePatternResolver) of this bean definition reader
-	 * @param actualResources a Set to be filled with the actual Resource objects
-	 * that have been resolved during the loading process. May be {@code null}
-	 * to indicate that the caller is not interested in those Resource objects.
-	 * @return the number of bean definitions found
-	 * @throws BeanDefinitionStoreException in case of loading or parsing errors
-	 * @see #getResourceLoader()
-	 * @see #loadBeanDefinitions(org.springframework.core.io.Resource)
-	 * @see #loadBeanDefinitions(org.springframework.core.io.Resource[])
+	 * 从指定的资源位置加载bean定义。这个位置也可以是一个位置模式，只要这个bean定义阅读器的ResourceLoader是一个ResourcePatternResolver。
+	 * @param actualResources资源位置，要用这个bean定义阅读器的ResourceLoader(或ResourcePatternResolver)加载。
+	 * @param actualResources一个集合，要用在加载过程中解析的实际资源对象填充。
+	 * 可以是{@code null}，表示调用者对那些Resource对象不感兴趣。返回找到的bean定义的数量
 	 */
 	public int loadBeanDefinitions(String location, @Nullable Set<Resource> actualResources) throws BeanDefinitionStoreException {
 		ResourceLoader resourceLoader = getResourceLoader();
@@ -218,7 +185,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 		}
 
 		if (resourceLoader instanceof ResourcePatternResolver) {
-			// Resource pattern matching available.
+			// 可用资源模式匹配。
 			try {
 				Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);
 				int count = loadBeanDefinitions(resources);
@@ -236,7 +203,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 			}
 		}
 		else {
-			// Can only load single resources by absolute URL.
+			// 只能加载单个资源的绝对URL。
 			Resource resource = resourceLoader.getResource(location);
 			int count = loadBeanDefinitions(resource);
 			if (actualResources != null) {

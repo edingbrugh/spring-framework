@@ -62,8 +62,7 @@ public class DefaultDocumentLoader implements DocumentLoader {
 
 
 	/**
-	 * Load the {@link Document} at the supplied {@link InputSource} using the standard JAXP-configured
-	 * XML parser.
+	 * 使用标准jaxp配置的XML解析器在提供的{@link InputSource}加载{@link文档}
 	 */
 	@Override
 	public Document loadDocument(InputSource inputSource, EntityResolver entityResolver,
@@ -78,12 +77,9 @@ public class DefaultDocumentLoader implements DocumentLoader {
 	}
 
 	/**
-	 * Create the {@link DocumentBuilderFactory} instance.
-	 * @param validationMode the type of validation: {@link XmlValidationModeDetector#VALIDATION_DTD DTD}
-	 * or {@link XmlValidationModeDetector#VALIDATION_XSD XSD})
-	 * @param namespaceAware whether the returned factory is to provide support for XML namespaces
-	 * @return the JAXP DocumentBuilderFactory
-	 * @throws ParserConfigurationException if we failed to build a proper DocumentBuilderFactory
+	 * 创建{@link DocumentBuilderFactory}实例。
+	 * @param validationMode验证类型:{@link XmlValidationModeDetectorVALIDATION_DTD}或{@link XmlValidationModeDetectorVALIDATION_XSD})
+	 * @param namespaceAware返回的工厂是否支持XML名称空间@返回JAXP DocumentBuilderFactory
 	 */
 	protected DocumentBuilderFactory createDocumentBuilderFactory(int validationMode, boolean namespaceAware)
 			throws ParserConfigurationException {
