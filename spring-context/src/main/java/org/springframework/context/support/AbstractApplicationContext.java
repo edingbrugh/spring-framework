@@ -84,47 +84,15 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
 
 /**
- * Abstract implementation of the {@link org.springframework.context.ApplicationContext}
- * interface. Doesn't mandate the type of storage used for configuration; simply
- * implements common context functionality. Uses the Template Method design pattern,
- * requiring concrete subclasses to implement abstract methods.
- *
- * <p>In contrast to a plain BeanFactory, an ApplicationContext is supposed
- * to detect special beans defined in its internal bean factory:
- * Therefore, this class automatically registers
- * {@link org.springframework.beans.factory.config.BeanFactoryPostProcessor BeanFactoryPostProcessors},
- * {@link org.springframework.beans.factory.config.BeanPostProcessor BeanPostProcessors},
- * and {@link org.springframework.context.ApplicationListener ApplicationListeners}
- * which are defined as beans in the context.
- *
- * <p>A {@link org.springframework.context.MessageSource} may also be supplied
- * as a bean in the context, with the name "messageSource"; otherwise, message
- * resolution is delegated to the parent context. Furthermore, a multicaster
- * for application events can be supplied as an "applicationEventMulticaster" bean
- * of type {@link org.springframework.context.event.ApplicationEventMulticaster}
- * in the context; otherwise, a default multicaster of type
- * {@link org.springframework.context.event.SimpleApplicationEventMulticaster} will be used.
- *
- * <p>Implements resource loading by extending
- * {@link org.springframework.core.io.DefaultResourceLoader}.
- * Consequently treats non-URL resource paths as class path resources
- * (supporting full class path resource names that include the package path,
- * e.g. "mypackage/myresource.dat"), unless the {@link #getResourceByPath}
- * method is overridden in a subclass.
- *
- * @author Rod Johnson
- * @author Juergen Hoeller
- * @author Mark Fisher
- * @author Stephane Nicoll
- * @author Sam Brannen
- * @since January 21, 2001
- * @see #refreshBeanFactory
- * @see #getBeanFactory
- * @see org.springframework.beans.factory.config.BeanFactoryPostProcessor
- * @see org.springframework.beans.factory.config.BeanPostProcessor
- * @see org.springframework.context.event.ApplicationEventMulticaster
- * @see org.springframework.context.ApplicationListener
- * @see org.springframework.context.MessageSource
+ * {@link org.springframework.context.context的抽象实现。ApplicationContext}接口。不要求配置所使用的存储类型;简单地实现公共上下文功能。
+ * 使用模板方法设计模式，需要具体的子类来实现抽象方法。与普通的BeanFactory相比，ApplicationContext应该检测在其内部bean工厂中定义的特殊bean:因此，
+ * 这个类自动注册{@link org.springframe.beans.factory.config . BeanFactoryPostProcessors}、{@link org.springframe.beans.factory.config .
+ * beanpostprocessor}和{@link org.springframe.context . applicationlistener ApplicationListeners}，它们被定义为上下文中的bean。
+ * < p > {@link org.springframework.context。MessageSource}也可以作为上下文中的bean提供，名称为“MessageSource”;否则，
+ * 消息解析将被委托给父上下文。此外，应用程序事件的多播程序可以作为类型为{@link org.springframework.context.event的“applicationEventMulticaster”bean提供。
+ * 在上下文中的ApplicationEventMulticaster};否则，默认的多播类型为{@link org.springframework.context.event。将使用SimpleApplicationEventMulticaster}。
+ * 通过扩展{@link org.springframe.core .io. defaultresourceloader}实现资源加载。因此，将非url资源路径视为类路径资源(支持包含包路径的完整类路径资源名，
+ * 例如。" mypackagemysource .dat")，除非{@link getResourceByPath}方法在子类中被重写
  */
 public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		implements ConfigurableApplicationContext {
@@ -518,38 +486,27 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		synchronized (this.startupShutdownMonitor) {
 			// 为刷新准备这个上下文。
 			prepareRefresh();
-
 			// 通知子类刷新内部bean工厂。
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
-
 			// 准备在此上下文中使用的bean工厂。
 			prepareBeanFactory(beanFactory);
-
 			try {
 				// 允许对上下文子类中的bean工厂进行后处理。
 				postProcessBeanFactory(beanFactory);
-
 				// 调用在上下文中作为bean注册的工厂处理器。
 				invokeBeanFactoryPostProcessors(beanFactory);
-
 				// 注册拦截bean创建的bean处理器。
 				registerBeanPostProcessors(beanFactory);
-
 				// 初始化此上下文的消息源。
 				initMessageSource();
-
 				// 为此上下文初始化事件多播程序
 				initApplicationEventMulticaster();
-
 				// 初始化特定上下文子类中的其他特殊bean。
 				onRefresh();
-
 				// 检查监听器bean并注册它们。
 				registerListeners();
-
 				// 实例化所有剩余的(非lazy-init)单例。
 				finishBeanFactoryInitialization(beanFactory);
-
 				// 最后一步:发布相应的事件。
 				finishRefresh();
 			}
@@ -559,17 +516,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 					logger.warn("Exception encountered during context initialization - " +
 							"cancelling refresh attempt: " + ex);
 				}
-
 				// 销毁已经创建的单例以避免悬空资源。
 				destroyBeans();
-
 				// 重置“活跃”的旗帜。
 				cancelRefresh(ex);
-
 				// 将异常传播给调用者。
 				throw ex;
 			}
-
 			finally {
 				//重置Spring核心中的公共自省缓存，因为我们可能再也不需要单例bean的元数据了……
 				resetCommonCaches();

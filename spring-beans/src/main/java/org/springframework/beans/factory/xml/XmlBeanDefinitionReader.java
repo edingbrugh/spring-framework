@@ -52,29 +52,11 @@ import org.springframework.util.xml.SimpleSaxErrorHandler;
 import org.springframework.util.xml.XmlValidationModeDetector;
 
 /**
- * Bean definition reader for XML bean definitions.
- * Delegates the actual XML document reading to an implementation
- * of the {@link BeanDefinitionDocumentReader} interface.
- *
- * <p>Typically applied to a
- * {@link org.springframework.beans.factory.support.DefaultListableBeanFactory}
- * or a {@link org.springframework.context.support.GenericApplicationContext}.
- *
- * <p>This class loads a DOM document and applies the BeanDefinitionDocumentReader to it.
- * The document reader will register each bean definition with the given bean factory,
- * talking to the latter's implementation of the
- * {@link org.springframework.beans.factory.support.BeanDefinitionRegistry} interface.
- *
- * @author Juergen Hoeller
- * @author Rob Harrop
- * @author Chris Beams
- * @see #setDocumentReaderClass
- * @see BeanDefinitionDocumentReader
- * @see DefaultBeanDefinitionDocumentReader
- * @see BeanDefinitionRegistry
- * @see org.springframework.beans.factory.support.DefaultListableBeanFactory
- * @see org.springframework.context.support.GenericApplicationContext
- * @since 26.11.2003
+ * 用于XML Bean定义的Bean定义阅读器。将实际的XML文档读取委托给{@link BeanDefinitionDocumentReader}接口的实现。
+ * <p>通常应用于{@link org.springframe.beans.factory .support。DefaultListableBeanFactory}或
+ * {@link org.springframe.context.support.genericapplicationcontext}。这个类加载一个DOM文档，
+ * 并将BeanDefinitionDocumentReader应用到它。文档阅读器将向给定的bean工厂注册每个bean定义，
+ * 与后者的{@link org.springframework.beans.factory.support的实现进行通信。BeanDefinitionRegistry}接口。
  */
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
@@ -354,11 +336,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	}
 
 	/**
-	 * Load bean definitions from the specified XML file.
-	 *
-	 * @param inputSource the SAX InputSource to read from
-	 * @return the number of bean definitions found
-	 * @throws BeanDefinitionStoreException in case of loading or parsing errors
+	 * 从指定的XML文件加载bean定义。
 	 */
 	public int loadBeanDefinitions(InputSource inputSource) throws BeanDefinitionStoreException {
 		return loadBeanDefinitions(inputSource, "resource loaded through SAX InputSource");

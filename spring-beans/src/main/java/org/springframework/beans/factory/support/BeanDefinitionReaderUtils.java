@@ -26,14 +26,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 /**
- * Utility methods that are useful for bean definition reader implementations.
- * Mainly intended for internal use.
- *
- * @author Juergen Hoeller
- * @author Rob Harrop
- * @since 1.1
- * @see PropertiesBeanDefinitionReader
- * @see org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader
+ * 对bean定义阅读器实现有用的实用程序方法。主要用于内部使用。
  */
 public abstract class BeanDefinitionReaderUtils {
 
@@ -150,20 +143,17 @@ public abstract class BeanDefinitionReaderUtils {
 	}
 
 	/**
-	 * Register the given bean definition with the given bean factory.
-	 * @param definitionHolder the bean definition including name and aliases
-	 * @param registry the bean factory to register with
-	 * @throws BeanDefinitionStoreException if registration failed
+	 * 向给定的bean工厂注册给定的bean定义。
 	 */
 	public static void registerBeanDefinition(
 			BeanDefinitionHolder definitionHolder, BeanDefinitionRegistry registry)
 			throws BeanDefinitionStoreException {
 
-		// Register bean definition under primary name.
+		//在主名称下注册bean定义。
 		String beanName = definitionHolder.getBeanName();
 		registry.registerBeanDefinition(beanName, definitionHolder.getBeanDefinition());
 
-		// Register aliases for bean name, if any.
+		// 为bean名注册别名(如果有的话)。
 		String[] aliases = definitionHolder.getAliases();
 		if (aliases != null) {
 			for (String alias : aliases) {

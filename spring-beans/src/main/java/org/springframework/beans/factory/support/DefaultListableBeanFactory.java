@@ -86,36 +86,13 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 /**
- * Spring's default implementation of the {@link ConfigurableListableBeanFactory}
- * and {@link BeanDefinitionRegistry} interfaces: a full-fledged bean factory
- * based on bean definition metadata, extensible through post-processors.
+ * spring对{@link ConfigurableListableBeanFactory}和{@link BeanDefinitionRegistry}接口的默认实现:基于bean定义元数据的成熟的bean工厂，
+ * 可通过后处理器进行扩展。典型用法是在访问bean之前，先注册所有bean定义(可能从bean定义文件中读取)。因此，在本地Bean定义表中，
+ * 按名称查找Bean是一种廉价的操作，操作于预先解析的Bean定义元数据对象。注意，特定bean定义格式的阅读器通常是单独实现的，
+ * 而不是作为bean工厂的子类:参见{@link org.springframe.beans.factory .xml. xmlbeandefinitionreader}。<p>对于
+ * {@link org.springframe.beans.factory .factory的替代实现。ListableBeanFactory}接口，
+ * 请查看{@link StaticListableBeanFactory}，它管理现有的bean实例，而不是根据bean定义创建新实例。
  *
- * <p>Typical usage is registering all bean definitions first (possibly read
- * from a bean definition file), before accessing beans. Bean lookup by name
- * is therefore an inexpensive operation in a local bean definition table,
- * operating on pre-resolved bean definition metadata objects.
- *
- * <p>Note that readers for specific bean definition formats are typically
- * implemented separately rather than as bean factory subclasses: see for example
- * {@link org.springframework.beans.factory.xml.XmlBeanDefinitionReader}.
- *
- * <p>For an alternative implementation of the
- * {@link org.springframework.beans.factory.ListableBeanFactory} interface,
- * have a look at {@link StaticListableBeanFactory}, which manages existing
- * bean instances rather than creating new ones based on bean definitions.
- *
- * @author Rod Johnson
- * @author Juergen Hoeller
- * @author Sam Brannen
- * @author Costin Leau
- * @author Chris Beams
- * @author Phillip Webb
- * @author Stephane Nicoll
- * @since 16 April 2001
- * @see #registerBeanDefinition
- * @see #addBeanPostProcessor
- * @see #getBean
- * @see #resolveDependency
  */
 @SuppressWarnings("serial")
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory

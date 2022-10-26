@@ -1402,11 +1402,7 @@ public class BeanDefinitionParserDelegate {
 	}
 
 	/**
-	 * Decorate the given bean definition through a namespace handler, if applicable.
-	 * @param ele the current element
-	 * @param originalDef the current bean definition
-	 * @param containingBd the containing bean definition (if any)
-	 * @return the decorated bean definition
+	 * 如果适用的话，可以通过名称空间处理程序装饰给定的bean定义。
 	 */
 	public BeanDefinitionHolder decorateBeanDefinitionIfRequired(
 			Element ele, BeanDefinitionHolder originalDef, @Nullable BeanDefinition containingBd) {
@@ -1527,7 +1523,7 @@ public class BeanDefinitionParserDelegate {
 	}
 
 	/**
-	 * Determine whether the given node indicates the default namespace.
+	 * 确定给定节点是否指示默认名称空间。
 	 */
 	public boolean isDefaultNamespace(Node node) {
 		return isDefaultNamespace(getNamespaceURI(node));
